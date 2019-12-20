@@ -39,7 +39,7 @@ const UpdateMovie = props => {
         .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
         .then(res => {
             console.log(res)
-            props.history.push("/")
+            props.history.push(`/`)
             setMovie(res.data)
         })
     }
