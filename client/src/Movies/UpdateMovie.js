@@ -5,7 +5,6 @@ import axios from "axios";
 const UpdateMovie = props => {
     console.log(props)
     const [movie, setMovie] = useState({id: "", title: "", director:"", metascore:"", stars:[]})
-    const [starState, setStarState] = useState([])
 
     console.log(props.match.params.id)
     useEffect(() => {
@@ -23,14 +22,9 @@ const UpdateMovie = props => {
         setMovie({...movie, [e.target.name]: e.target.value})
     }
 
-    const addStars = e => {
-        e.preventDefault();
-        setMovie({...movie, stars: [...movie.stars, starState]})
-        setStarState([])
-    }
 
     const starHandleChanges = e => {
-        setStarState([...e.target.value])
+        setMovie({...movie, stars: e.target.value.split(" ")})
     }
 
     const handleSubmit = e => {
@@ -51,12 +45,8 @@ const UpdateMovie = props => {
                 <input type="text" name="title" placeholder="Title" onChange={handleChanges} value={movie.title} />
                 <input type="text" name="director" placeholder="Director" onChange={handleChanges} value={movie.director}  />
                 <input type="number" name="metascore" placeholder="Metascore" onChange={handleChanges} value={movie.metascore}  />
-                <input type="text" name="stars" placeholder="Stars" value={starState.stars} onChange={starHandleChanges}/>
-                <h5>Stars</h5>
-                <button onClick={addStars}>Add Stars</button>
-                {movie.stars.map(star => {
-                    return <p key={star.id}>{star}</p>
-                })}
+                <input type="text" name="stars" placeholder="Stars" value={movie.stars} onChange={starHandleChanges}/>
+
                 <button type="submit">Save</button>
             </form>
         </div>

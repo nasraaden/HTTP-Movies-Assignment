@@ -21,6 +21,7 @@ const MovieCard = props => {
         </div>
       ))}
       <button onClick={props.editMovie}>Edit</button>
+      <button onClick={props.deleteMovie}>Delete</button>
     </div>
   );
 };
